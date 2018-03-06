@@ -15,6 +15,15 @@ library("shiny")
 #                                                                             #
 ###############################################################################
 
+drug.long.freq <- gather(drug.data, drugs, values, alcohol.frequency, marijuana.frequency, cocaine.frequency, crack.frequency, 
+                         heroin.frequency, hallucinogen.frequency, inhalant.frequency, pain.releiver.frequency, 
+                         oxycontin.frequency, tranquilizer.frequency, stimulant.frequency, meth.frequency, sedative.frequency) %>%
+  select(age, drugs, values)
+
+drug.long.use <- gather(drug.data, drugs, values, alcohol.use, marijuana.use, cocaine.use, crack.use, 
+                        heroin.use, hallucinogen.use, inhalant.use, pain.releiver.use, 
+                        oxycontin.use, tranquilizer.use, stimulant.use, meth.use, sedative.use) %>%
+  select(age, drugs, values)
 
 ui <- fluidPage(
   titlePanel("Drug Use And Abuse"),
@@ -37,7 +46,13 @@ ui <- fluidPage(
     #####################################################################
     conditionalPanel(
       condition = "input.dataTabs == 'Plot1' | input.dataTabs == 'Plot2'",
-      h3('Plot1/2')
+      h3('Plot1/2'),
+      # create slider input titled Year, with the ticks being the different years
+      em("Select a year"),
+      selectInput("Age", "Age group:",
+                  c("12", "13", "14", "15", "16", 
+                    "17", "18", "19", "20", "21", 
+                    "22-23", "24-25", "26-29", "30-34", "35-49", "50-64", "65+"))
     ),
     
     ##################################################################
@@ -65,14 +80,14 @@ ui <- fluidPage(
                 ##########################
                 tabPanel("Plot1", 
                          h3("Plot 1"),
-                         br(), p("Plot 1")),
+                         br(), p("Plot 1"), plotOutput("plot")),
                 
                 ################################
                 #  Tab for Plot 2 (Frequency)  #
                 ################################
                 tabPanel("Plot2", 
                          h3("Plot 2"),
-                         br(), p("Plot 2")),
+                         br(), p("Plot 2"), plotOutput("plot2")),
                 
                 ##############################
                 #  Tab for Connecticut Data  #
