@@ -1,4 +1,4 @@
-library(shiny)
+source("drug-vars.R")
 
 server <- function(input, output) {
   

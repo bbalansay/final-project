@@ -1,6 +1,3 @@
-library("shiny")
-library("shinythemes")
-
 ###############################################################################
 #                                                                             #
 #  I've set the UI up so that each data visualization has its own tab.        #
@@ -16,15 +13,7 @@ library("shinythemes")
 #                                                                             #
 ###############################################################################
 
-drug.long.freq <- gather(drug.data, drugs, values, alcohol.frequency, marijuana.frequency, cocaine.frequency, crack.frequency, 
-                         heroin.frequency, hallucinogen.frequency, inhalant.frequency, pain.releiver.frequency, 
-                         oxycontin.frequency, tranquilizer.frequency, stimulant.frequency, meth.frequency, sedative.frequency) %>%
-  select(age, drugs, values)
-
-drug.long.use <- gather(drug.data, drugs, values, alcohol.use, marijuana.use, cocaine.use, crack.use, 
-                        heroin.use, hallucinogen.use, inhalant.use, pain.releiver.use, 
-                        oxycontin.use, tranquilizer.use, stimulant.use, meth.use, sedative.use) %>%
-  select(age, drugs, values)
+source("drug-vars.R")
 
 ui <- fluidPage(
   theme = shinytheme("superhero"),
