@@ -1,5 +1,3 @@
-library("shiny")
-library("shinythemes")
 
 ###############################################################################
 #                                                                             #
@@ -16,10 +14,10 @@ library("shinythemes")
 #                                                                             #
 ###############################################################################
 
+source("drug-vars.R")
 
 ui <- fluidPage(
   theme = shinytheme("superhero"),
-  
   titlePanel("Drug Use And Abuse"),
   h5(style = "padding-left:1em;",
      "An INFO 201 group project by Bradley Balansay, Sam Chiang, Pranav Kartha, and McKinley Harvey"),
@@ -32,7 +30,27 @@ ui <- fluidPage(
     ##################################################
     conditionalPanel(
       condition = "input.dataTabs == 'Summary'",
-      h3("The Data")
+      h3("The Data"),
+      sliderInput( "Year",
+                   "Year:",
+                   value = 16,
+                   min = 1998,
+                   max = 2014),
+      
+      selectInput("drug_choice", label = h3("Select a drug to analyze"), 
+                  choices = c("alcohol", "marijuana", "cocaine", "crack" , "heroin", "hallucinogen", 
+                              "inhalant", "pain.reliever", "oxycontin", "tranquilizer", "stimulant",
+                              "meth", "sedative"), 
+                  selected = 1),
+      
+      
+      selectInput("Minimum Age Group", label = h3("Minimum Age Group"), 
+                  choices = drug.data$age, 
+                  selected = 1),
+      
+      selectInput("Maximum Age Group", label = h3("Maximum Age Group"), 
+                  choices = drug.data$age, 
+                  selected = 1)
     ),
     
     #####################################################################
@@ -40,7 +58,13 @@ ui <- fluidPage(
     #####################################################################
     conditionalPanel(
       condition = "input.dataTabs == 'Plot1' | input.dataTabs == 'Plot2'",
-      h3('Plot1/2')
+      h3('Plot1/2'),
+      # create slider input titled Year, with the ticks being the different years
+      em("Select a year"),
+      selectInput("Age", "Age group:",
+                  c("12", "13", "14", "15", "16", 
+                    "17", "18", "19", "20", "21", 
+                    "22-23", "24-25", "26-29", "30-34", "35-49", "50-64", "65+"))
     ),
     
     ##################################################################
@@ -64,14 +88,14 @@ ui <- fluidPage(
     )
     
   ),
-  
+ 
   mainPanel(
     tabsetPanel(type = "tabs", id = "dataTabs",
                 
                 #########################
                 #  Tab for the Summary  #
                 #########################
-                tabPanel("Summary",
+                tabPanel("Summary",plotOutput("weedTime"),
                          h3("Summary"),
                          br(), p("Summary")),
                 
@@ -80,14 +104,15 @@ ui <- fluidPage(
                 ##########################
                 tabPanel("Plot1", 
                          h3("Plot 1"),
-                         br(), p("Plot 1")),
+                         br(), p("Plot 1"), plotOutput("plot")),
                 
                 ################################
                 #  Tab for Plot 2 (Frequency)  #
                 ################################
-                tabPanel("Plot2", 
-                         h3("Plot 2"),
-                         br(), p("Plot 2")),
+
+                tabPanel("Plot2",
+                         h3("Drug Use vs. Age Group"),
+                         br(), p("Plot 2"), plotOutput("plot2")),
                 
                 ##############################
                 #  Tab for Connecticut Data  #
