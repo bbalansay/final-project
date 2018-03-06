@@ -45,8 +45,20 @@ ui <- fluidPage(
     ##################################################################
     conditionalPanel(
       condition = "input.dataTabs == 'Effects'",
-      h3('Effects')
-    )
+      h3('Effects'), 
+      sliderInput("year",
+                  "Select A Year",
+                  min = 2012,
+                  max = 2017,
+                  value = 2012,
+                  sep = ""),
+      
+      selectInput("fill",
+                  "What Would You Like to Compare Within The Charts?",
+                  c("Sex",
+                    "Location of Death" = "Location",
+                    "Nothing"))
+      )
     
   ),
   
@@ -79,9 +91,12 @@ ui <- fluidPage(
                 ##############################
                 tabPanel("Effects", 
                          h3("Effects"),
-                         br(), p("Effects"))
+                         br(), p("Effects"),
+                         plotOutput("yearPlot")
+                         
+                         
     )
   )
-)
+))
 
 shinyUI(ui)
