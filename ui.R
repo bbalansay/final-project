@@ -1,4 +1,5 @@
 library("shiny")
+library("shinythemes")
 
 ###############################################################################
 #                                                                             #
@@ -26,6 +27,8 @@ drug.long.use <- gather(drug.data, drugs, values, alcohol.use, marijuana.use, co
   select(age, drugs, values)
 
 ui <- fluidPage(
+  theme = shinytheme("superhero"),
+  
   titlePanel("Drug Use And Abuse"),
   h5(style = "padding-left:1em;",
      "An INFO 201 group project by Bradley Balansay, Sam Chiang, Pranav Kartha, and McKinley Harvey"),
