@@ -8,7 +8,7 @@ server <- function(input, output) {
     
     bar.plot <- ggplot(filtered.data, aes(x = filtered.data$drugs, y = filtered.data$values)) +
       geom_bar(stat = "identity", aes(fill = drugs)) +
-      labs(title = "Drug Frequency by Age in 2012", 
+      labs(title = "Drug Frequency By Age In 2012", 
            x = "Drugs",
            y = "Median amounts of usage") +
       coord_flip()
@@ -23,7 +23,7 @@ server <- function(input, output) {
     
     bar.plot <- ggplot(filtered.data, aes(x = filtered.data$drugs, y = filtered.data$values)) +
       geom_bar(stat = "identity", aes(fill = drugs)) +
-      labs(title = "Drug use percentage by Age in 2012", 
+      labs(title = "Drug Use Percentage By Age In 2012", 
            x = "Drugs",
            y = "Usage (%)") +
       coord_flip()
