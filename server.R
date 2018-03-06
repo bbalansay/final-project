@@ -26,7 +26,7 @@ server <- function(input, output) {
       filter( age > input$`Minimum Age Group`) %>%
       filter(age < input$`Maximum Age Group`)
     
-    geom_bar(stat="identity")
+    geom_bar(stat="identity", aes(fill = drugs))
     if(input$drug_choice == "alcohol") {
       age.graph <- ggplot(data=drug.data.filtered, aes(x=age, y=alcohol.use)) +
         geom_bar(stat="identity")

@@ -4,7 +4,7 @@ library("dplyr")
 library("tidyr")
 library("ggplot2")
 
-drug.data <- read.csv("data/drug-use.csv")
+drug.data <- read.csv("data/drug-use.csv", stringsAsFactors = FALSE)
 
 drug.long.freq <- gather(drug.data, drugs, values, alcohol.frequency, marijuana.frequency, cocaine.frequency, crack.frequency, 
                          heroin.frequency, hallucinogen.frequency, inhalant.frequency, pain.releiver.frequency, 

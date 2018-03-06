@@ -17,6 +17,7 @@
 source("drug-vars.R")
 
 ui <- fluidPage(
+  theme = shinytheme("superhero"),
   titlePanel("Drug Use And Abuse"),
   h5(style = "padding-left:1em;",
      "An INFO 201 group project by Bradley Balansay, Sam Chiang, Pranav Kartha, and McKinley Harvey"),
@@ -29,7 +30,27 @@ ui <- fluidPage(
     ##################################################
     conditionalPanel(
       condition = "input.dataTabs == 'Summary'",
-      h3("The Data")
+      h3("The Data"),
+      sliderInput( "Year",
+                   "Year:",
+                   value = 16,
+                   min = 1998,
+                   max = 2014),
+      
+      selectInput("drug_choice", label = h3("Select a drug to analyze"), 
+                  choices = c("alcohol", "marijuana", "cocaine", "crack" , "heroin", "hallucinogen", 
+                              "inhalant", "pain.reliever", "oxycontin", "tranquilizer", "stimulant",
+                              "meth", "sedative"), 
+                  selected = 1),
+      
+      
+      selectInput("Minimum Age Group", label = h3("Minimum Age Group"), 
+                  choices = drug.data$age, 
+                  selected = 1),
+      
+      selectInput("Maximum Age Group", label = h3("Maximum Age Group"), 
+                  choices = drug.data$age, 
+                  selected = 1)
     ),
     
     #####################################################################
@@ -55,27 +76,6 @@ ui <- fluidPage(
     )
     
   ),
-  
-  sliderInput( "Year",
-               "Year:",
-               value = 16,
-               min = 1998,
-               max = 2014),
-  
-  selectInput("drug_choice", label = h3("Select a drug to analyze"), 
-              choices = c("alcohol", "marijuana", "cocaine", "crack" , "heroin", "hallucinogen", 
-                          "inhalant", "pain.reliever", "oxycontin", "tranquilizer", "stimulant",
-                          "meth", "sedative"), 
-              selected = 1),
-  
-  
-  selectInput("Minimum Age Group", label = h3("Minimum Age Group"), 
-              choices = drug.data$age, 
-              selected = 1),
-  
-  selectInput("Maximum Age Group", label = h3("Maximum Age Group"), 
-              choices = drug.data$age, 
-              selected = 1),
  
   mainPanel(
     tabsetPanel(type = "tabs", id = "dataTabs",
