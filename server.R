@@ -1,15 +1,22 @@
-library(shiny)
-library(ggplot2)
 
-
-drug.data <- read.csv("data/drug-use.csv", stringsAsFactors = FALSE)
-
-
-
-
+source("drug-vars.R")
 
 server <- function(input, output) {
   
+  output$plot <- renderPlot({
+    
+    filtered.data <- filter(drug.long.freq, age == input$Age)
+    
+    bar.plot <- ggplot(filtered.data, aes(x = filtered.data$drugs, y = filtered.data$values)) +
+      geom_bar(stat = "identity", aes(fill = drugs)) +
+      labs(title = "Drug Frequency by Age in 2012", 
+           x = "Drugs",
+           y = "Median amounts of usage") +
+      coord_flip()
+    
+    return(bar.plot)
+    
+  })
   output$weedTime <-renderPlot({
     
     
@@ -30,8 +37,8 @@ server <- function(input, output) {
       age.graph <- ggplot(data=drug.data.filtered, aes(x=age, y=cocaine.use)) +
         geom_bar(stat="identity")
     }  else if (input$drug_choice == "crack") {
-        age.graph <- ggplot(data=drug.data.filtered, aes(x=age, y=crack.use)) +
-          geom_bar(stat="identity")
+      age.graph <- ggplot(data=drug.data.filtered, aes(x=age, y=crack.use)) +
+        geom_bar(stat="identity")
     }
     
     else if (input$drug_choice == "heroin") {
@@ -66,12 +73,28 @@ server <- function(input, output) {
       age.graph <- ggplot(data=drug.data.filtered, aes(x=age, y=meth.use)) +
         geom_bar(stat="identity")
     } else if (input$drug_choice == "sedative") {
-    age.graph <- ggplot(data=drug.data.filtered, aes(x=age, y=sedative.use)) +
-      geom_bar(stat="identity")
-  }
+      age.graph <- ggplot(data=drug.data.filtered, aes(x=age, y=sedative.use)) +
+        geom_bar(stat="identity")
+    }
     plot(age.graph)
-  return(age.graph)
-})
-}  
+    return(age.graph)
+  })
+  
+  output$plot2 <- renderPlot({
+    
+    filtered.data <- filter(drug.long.use, age == input$Age)
+    
+    bar.plot <- ggplot(filtered.data, aes(x = filtered.data$drugs, y = filtered.data$values)) +
+      geom_bar(stat = "identity", aes(fill = drugs)) +
+      labs(title = "Drug use percentage by Age in 2012", 
+           x = "Drugs",
+           y = "Usage (%)") +
+      coord_flip()
+    
+    return(bar.plot)
+    
+  })
+  
+}
 
 shinyServer(server)
