@@ -1,4 +1,4 @@
-
+library(shinythemes)
 ###############################################################################
 #                                                                             #
 #  I've set the UI up so that each data visualization has its own tab.        #
@@ -29,7 +29,7 @@ ui <- fluidPage(
     #  For the summary data, put sidebar stuff here  #
     ##################################################
     conditionalPanel(
-      condition = "input.dataTabs == 'Summary'",
+      condition = "input.dataTabs == 'Age group vs. Drug Usage'",
       h3("The Data"),
       
       selectInput("drug_choice", "Select a drug to analyze:", 
@@ -97,9 +97,20 @@ ui <- fluidPage(
                 #########################
                 #  Tab for the Summary  #
                 #########################
-                tabPanel("Summary",plotOutput("weedTime"),
+                tabPanel("Age group vs. Drug Usage",plotOutput("weedTime"),
                          h3("Summary"),
-                         br(), p("Summary")),
+                         br(), p("This data visualization displays a bar graph showing the distribution of
+                                 drug use amoung different age groups. With this data, we wanted to see whether
+                                 if there was a specific age where people stoppped using drugs.  The graphs show
+                                 that in most cases, drug use is highest during one's late teens/early 20s. In addition, 
+                                 this data would allow us to view how socially acceptable certain drugs were for
+                                 different age groups. For example, alcohol appear is much more socially acceptable
+                                 than other drugs; this is indicated by the amount of older alcohol users being much 
+                                 higher than for other drugs.") ,
+                                 p("Most of the data follows a bell curve, centered around the age range of 20. This data
+                                 also allows us to see data that deviates from this data, and draw conclusions from that.
+                                 For example, inhalant use seems to be centered around younger ages. This could be because 
+                                 younger people don't have access to other drugs.")),
                 
                 ##########################
                 #  Tab for Plot 1 (Use)  #
