@@ -73,14 +73,21 @@ server <- function(input, output) {
     return(bar.plot)
     
   })
+  
+  # outputs a bar graph displaying frequency of drug use across different age groups
   output$weedTime <-renderPlot({
     
+    # gets drug choice from user inout
     drug.use <- paste0(input$drug_choice, ".use")
     
+    # filters out data not in the data range from the graph. 
     drug.data.filtered <- select(drug.data, age, drug.use) %>%
       filter(age >= input$min.age) %>%
       filter(age <= input$max.age)
     
+    
+    # depending on which drug is chosen, the app will choose the approrpiate
+    # aesthetics for the bar graph, and graph accordingly. 
     if(input$drug_choice == "alcohol") {
       age.graph <- ggplot(data=drug.data.filtered, aes(x=age, y=alcohol.use)) +
         geom_bar(stat="identity", aes(fill = age))
@@ -121,6 +128,8 @@ server <- function(input, output) {
       age.graph <- ggplot(data=drug.data.filtered, aes(x=age, y=sedative.use)) +
         geom_bar(stat="identity", aes(fill = age))
     }
+    
+    #plots graph
     plot(age.graph)
     return(age.graph)
   })
