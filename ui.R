@@ -31,26 +31,28 @@ ui <- fluidPage(
     conditionalPanel(
       condition = "input.dataTabs == 'Summary'",
       h3("The Data"),
-      sliderInput( "Year",
-                   "Year:",
-                   value = 16,
-                   min = 1998,
-                   max = 2014),
       
-      selectInput("drug_choice", label = h3("Select a drug to analyze"), 
+      selectInput("drug_choice", "Select a drug to analyze:", 
                   choices = c("alcohol", "marijuana", "cocaine", "crack" , "heroin", "hallucinogen", 
                               "inhalant", "pain.reliever", "oxycontin", "tranquilizer", "stimulant",
                               "meth", "sedative"), 
                   selected = 1),
       
+      hr(),
       
-      selectInput("Minimum Age Group", label = h3("Minimum Age Group"), 
-                  choices = drug.data$age, 
-                  selected = 1),
+      selectInput("min.age", "Minimum Age:", 
+                  c("12", "13", "14", "15", "16", 
+                    "17", "18", "19", "20", "21", 
+                    "22-23", "24-25", "26-29", "30-34", "35-49", "50-64", "65+"), 
+                  selected = "12"),
       
-      selectInput("Maximum Age Group", label = h3("Maximum Age Group"), 
-                  choices = drug.data$age, 
-                  selected = 1)
+      h5(style = "text-align:center;", "to"),
+      
+      selectInput("max.age", "Maximum Age:", 
+                  c("12", "13", "14", "15", "16", 
+                    "17", "18", "19", "20", "21", 
+                    "22-23", "24-25", "26-29", "30-34", "35-49", "50-64", "65+"), 
+                  selected = "65+")
     ),
     
     #####################################################################
@@ -83,8 +85,7 @@ ui <- fluidPage(
       selectInput("fill",
                   "What Would You Like to Compare Within The Charts?",
                   c("Sex",
-                    "Location of Death" = "Location",
-                    "Nothing"))
+                    "Location of Death" = "Location"))
     )
     
   ),
@@ -119,9 +120,7 @@ ui <- fluidPage(
                 ##############################
                 tabPanel("Effects", 
                          h3("Effects"),
-                         br(), p("Effects"),
-                plotOutput("yearPlot")
-                )
+                         br(), p("Effects"), plotOutput("yearPlot"))
     )
   )
 )

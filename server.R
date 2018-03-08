@@ -17,12 +17,7 @@ server <- function(input, output) {
         geom_bar(mapping = aes(x = Age, fill = Location)) +
         labs(title = paste(titles, "When Compared with", input$fill)) +
         scale_colour_manual(values = c("Hospital" = "dark green", "Residence" = "red", "Hospice" = "dark blue", "Other" = "yellow"))
-    } else {
-      ggplot(data = year.deaths) +
-        geom_bar(mapping = aes(x = Age)) +
-        labs(title = titles)
-        
-    }
+    } 
     
   })
   
@@ -43,11 +38,11 @@ server <- function(input, output) {
   output$weedTime <-renderPlot({
     
     
-    drug.use <-paste0(input$drug_choice, ".use")
+    drug.use <- paste0(input$drug_choice, ".use")
     
     drug.data.filtered <- select(drug.data, age, drug.use) %>%
-      filter( age > input$`Minimum Age Group`) %>%
-      filter(age < input$`Maximum Age Group`)
+      filter(age >= input$min.age) %>%
+      filter(age <= input$max.age)
     
     geom_bar(stat="identity", aes(fill = drugs))
     if(input$drug_choice == "alcohol") {
