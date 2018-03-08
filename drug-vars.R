@@ -3,6 +3,7 @@ library("shinythemes")
 library("dplyr")
 library("tidyr")
 library("ggplot2")
+library("stringr")
 
 drug.data <- read.csv("data/drug-use.csv", stringsAsFactors = FALSE)
 
