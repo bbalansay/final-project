@@ -59,10 +59,10 @@ ui <- fluidPage(
     #  Agree on the widgets for plot 1/2 (use and freq), put them here  #
     #####################################################################
     conditionalPanel(
-      condition = "input.dataTabs == 'Plot1' | input.dataTabs == 'Plot2'",
-      h3('Plot1/2'),
+      condition = "input.dataTabs == 'Frequency Plot' | input.dataTabs == 'Usage Plot'",
+      h3('Choose the Population'),
       # create slider input titled Year, with the ticks being the different years
-      em("Select a year"),
+      em("Select an age group"),
       selectInput("Age", "Age group:",
                   c("12", "13", "14", "15", "16", 
                     "17", "18", "19", "20", "21", 
@@ -115,17 +115,43 @@ ui <- fluidPage(
                 ##########################
                 #  Tab for Plot 1 (Use)  #
                 ##########################
-                tabPanel("Plot1", 
-                         h3("Plot 1"),
-                         br(), p("Plot 1"), plotOutput("plot")),
+                tabPanel("Frequency Plot", 
+                         h3("Drug Use vs. Age Group: Frequency by Age in 2012"),
+                         br(), 
+                        plotOutput("plot"),
+                         br(),
+                        p("This plot uses data was derived by the United States Department of Health and Human Services. Here, frequency is measured by the median number of times in an age group that used
+                           the specific drug in the past 12 months of 2012. By looking at the average number
+                          of usages across different ages, we can answer the question about how much exactly do the young, middle-aged, or elderly use drugs."), 
+                        p("It is shocking to find that the youngest age group, which is 12 years old, use hallucinogens and tranquilizers the most. Moreover, it is reported
+                          that they used heroin just a little over 30 number of times in the past 12 months. This might've been the most
+                          questionable discovery. However, the rest shows more understandable trends. Alcohol usage averages to around 15 when the respondants are 17 years old
+                          or younger. As soon as they turn 18, the amounts go up in considerable amounts. By age 20, alcohol usage hits about 50. Another interesting discovery was 
+                          that all the drugs besides inhalants and hallucinogens were quite high by the ages of 30-34. In the next category of 35-49, however, all of the drugs 
+                          drop in numbers besides heroin, which towers over the others. In the next age group, 50-64, sedatives become the dominant drug, which might make sense as people
+                          become older. Lastly, stimulants are the ones to surprisingly dominate all categories in the age group of 65+. All in all, it seems to be that in certain age groups,
+                          one to three drugs usually surpasses the others in usage as they get older.")),
                 
                 ################################
                 #  Tab for Plot 2 (Frequency)  #
                 ################################
 
-                tabPanel("Plot2",
-                         h3("Drug Use vs. Age Group"),
-                         br(), p("Plot 2"), plotOutput("plot2")),
+                tabPanel("Usage Plot",
+                         h3("Drug Use vs. Age Group: Usage by Age in 2012"),
+                         br(), plotOutput("plot2"),
+                         br(),
+                         p("This next plot also uses data derived from the United States Department of Health and Human Services. This data calculates usage, which
+                           is defined by the percentage of those in the specified age group that used a certain drug in the past 12 months of 2012. By looking at percentages
+                           instead of an estimated amount previously, it gives us a better overview of drug use. Thus, these graphs can answer the question about
+                           what drugs are least used as time goes on, and if these drugs that aren't used as much eventually increase."),
+                         p("Each age group had a different amount of respondants. The percentages were based on 2798 12 year olds, 2757 13 year olds, 2792 14 year olds,
+                           2956 15 year olds, 3058 16 year olds, 3038 17 year olds, 2469 18 year olds, 2223 19 year olds, 2271 20 year olds, 2354 21 year olds, 
+                           4707 22-23 year olds, 4591 24-25 year olds, 2628 26-29 year olds, 2864 30-34 year olds, 7391 35-49, 3923 50-64 year olds, and 2448 65+ year olds."),
+                         p("It is no surprise that alcohol and marijuana are the dominant drugs in almost every age group, so we can disregard that for now. For the children younger than 16, inhalants and
+                           pain relievers were popular, hovering around 5%. However, as they got older, those drugs start decreasing, and we can see a steady growth of marijuana and alcohol. All other drugs remain low -- 
+                           5%. Interestingly, this is consistent all the way until the oldest age group. In fact, almost all of the drugs eventually fall below 2% and even 0% in the 65+ category, where alcohol is still used
+                           by over 70% of the respondants. This was particularly surprising because we thought the use of pain relievers would be much higher as people got old and needed to rely on them for various
+                           reasons. Although the percentages were low, tranquilizers and pain relievers were the only two drugs that were still used in the older age group besides alcohol and marijuana.")),
                 
                 ##############################
                 #  Tab for Connecticut Data  #
