@@ -10,11 +10,11 @@ server <- function(input, output) {
     year.deaths <- drug.deaths[substr(drug.deaths$Date, 7, 10) == input$year, ] 
     if(input$fill == "Sex") {
       ggplot(data = year.deaths) +
-        geom_bar(mapping = aes(x = Age, fill = Sex, color = Sex)) +
+        geom_bar(mapping = aes(x = Age, fill = Sex)) +
         labs(title = paste(titles, "When Compared with", input$fill)) 
     } else if (input$fill == "Location") {
       ggplot(data = year.deaths) +
-        geom_bar(mapping = aes(x = Age, fill = Location, color = Location)) +
+        geom_bar(mapping = aes(x = Age, fill = Location)) +
         labs(title = paste(titles, "When Compared with", input$fill))
       } 
   })
