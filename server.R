@@ -18,6 +18,35 @@ server <- function(input, output) {
         labs(title = paste(titles, "When Compared with", input$fill)) +
         scale_colour_manual(values = c("Hospital" = "dark green", "Residence" = "red", "Hospice" = "dark blue", "Other" = "yellow"))
     } 
+  })
+  
+  output$intro <- renderText({
+    "This data set contains information on accidental deaths by drug overdoses from the years 2012 to 2017 in the state of Connecticut. The types of drugs found in bodies included heroin, cocaine, fentanyl, oxycodone, oxymorphone, and more. Marijauana is not included as there have been no cases where marijauna was the immediate cause of death. It appears that heroin was one of the most used drugs that lead to death with 54% of bodies found contained this drug. 28% of bodies were found to have some amount of cocaine and 31% of bodies were found to have contained at least some fentanyl." 
+    
+  })
+  
+  output$analysis <- renderText({
+    if(input$fill == "Sex") {
+        "It would be interesting to see how gender differs between these deaths. 
+      From 2012 to 2017, there were many more men who died from drug overdose. 
+      In fact, only 27% of the bodies were female. The data show that many more 
+      men die every year than women. In addition, very young people (ie less than 
+      20 years old) and older people (ie greater than 60 years) show fewer counts 
+      for accidental overdoses. It would be interesting to read studies as to why 
+      males are more likely to die from overdose than females and how to prevent 
+      these deaths."
+     
+    } else {
+      "Furthermore, it is interesting to look at where people die as well. 
+      The vast majorities of these deaths seem to have been taken place in 
+      some residence (52%), with the next most location of deaths being in 
+      hospitals (33%). This suggests that people may take the drug at home 
+      and then travel to the hospital in hopes of treatment for an overdose 
+      before succumbing to death. It appears that throughout age, hospitals 
+      and residences are the most common places people die from accidental 
+      drug overdoses, which makes sense."
+    }
+    
     
   })
   
