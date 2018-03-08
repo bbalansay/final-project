@@ -73,7 +73,7 @@ ui <- fluidPage(
     #  Whatever is used for the Connecticut stuff, put widgets here  #
     ##################################################################
     conditionalPanel(
-      condition = "input.dataTabs == 'Effects'",
+      condition = "input.dataTabs == 'Case Study'",
       h3('Effects'), 
       sliderInput("year",
                   "Select A Year",
@@ -85,7 +85,8 @@ ui <- fluidPage(
       selectInput("fill",
                   "What Would You Like to Compare Within The Charts?",
                   c("Sex",
-                    "Location of Death" = "Location"))
+                    "Location of Death" = "Location")),
+      textOutput("intro")
     )
     
   ),
@@ -118,9 +119,9 @@ ui <- fluidPage(
                 ##############################
                 #  Tab for Connecticut Data  #
                 ##############################
-                tabPanel("Effects", 
-                         h3("Effects"),
-                         br(), p("Effects"), plotOutput("yearPlot"))
+                tabPanel("Case Study", 
+                         h3("Accidental Death By Drug Overdoes in Connecticut"),
+                         br(), plotOutput("yearPlot"), h3("How Do Deaths Compare by Sex or Location of Death?"), textOutput("analysis"))
     )
   )
 )
