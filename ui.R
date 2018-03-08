@@ -97,8 +97,8 @@ ui <- fluidPage(
                 #########################
                 #  Tab for the Summary  #
                 #########################
-                tabPanel("Age group vs. Drug Usage",plotOutput("weedTime"),
-                         h3("Summary"),
+                tabPanel("Age group vs. Drug Usage", h3("Summary"),
+                         plotOutput("weedTime"),
                          br(), p("This data visualization displays a bar graph showing the distribution of
                                  drug use amoung different age groups. With this data, we wanted to see whether
                                  if there was a specific age where people stoppped using drugs.  The graphs show
