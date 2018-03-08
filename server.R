@@ -10,18 +10,27 @@ server <- function(input, output) {
     year.deaths <- drug.deaths[substr(drug.deaths$Date, 7, 10) == input$year, ] 
     if(input$fill == "Sex") {
       ggplot(data = year.deaths) +
-        geom_bar(mapping = aes(x = Age, fill = Sex)) +
+        geom_bar(mapping = aes(x = Age, fill = Sex, color = Sex)) +
         labs(title = paste(titles, "When Compared with", input$fill)) 
     } else if (input$fill == "Location") {
       ggplot(data = year.deaths) +
-        geom_bar(mapping = aes(x = Age, fill = Location)) +
-        labs(title = paste(titles, "When Compared with", input$fill)) +
-        scale_colour_manual(values = c("Hospital" = "dark green", "Residence" = "red", "Hospice" = "dark blue", "Other" = "yellow"))
-    } 
+        geom_bar(mapping = aes(x = Age, fill = Location, color = Location)) +
+        labs(title = paste(titles, "When Compared with", input$fill))
+      } 
   })
   
   output$intro <- renderText({
-    "This data set contains information on accidental deaths by drug overdoses from the years 2012 to 2017 in the state of Connecticut. The types of drugs found in bodies included heroin, cocaine, fentanyl, oxycodone, oxymorphone, and more. Marijauana is not included as there have been no cases where marijauna was the immediate cause of death. It appears that heroin was one of the most used drugs that lead to death with 54% of bodies found contained this drug. 28% of bodies were found to have some amount of cocaine and 31% of bodies were found to have contained at least some fentanyl." 
+    "This data set contains information on accidental 
+    deaths by drug overdoses from the years 2012 to 
+    2017 in the state of Connecticut. The types of drugs 
+    found in bodies included heroin, cocaine, fentanyl, 
+    oxycodone, oxymorphone, and more. Marijauana is not 
+    included as there have been no cases where marijauna 
+    was the immediate cause of death. It appears that heroin 
+    was one of the most used drugs that lead to death with 
+    54% of bodies found contained this drug. 28% of bodies 
+    were found to have some amount of cocaine and 31% of 
+    bodies were found to have contained at least some fentanyl." 
     
   })
   
