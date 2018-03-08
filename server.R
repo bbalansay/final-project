@@ -16,13 +16,7 @@ server <- function(input, output) {
       ggplot(data = year.deaths) +
         geom_bar(mapping = aes(x = Age, fill = Location)) +
         labs(title = paste(titles, "When Compared with", input$fill))
-    } else {
-      ggplot(data = year.deaths) +
-        geom_bar(mapping = aes(x = Age)) +
-        labs(title = titles)
-        
     }
-    
   })
   
   output$plot <- renderPlot({
