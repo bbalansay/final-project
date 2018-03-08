@@ -11,11 +11,12 @@ server <- function(input, output) {
     if(input$fill == "Sex") {
       ggplot(data = year.deaths) +
         geom_bar(mapping = aes(x = Age, fill = Sex)) +
-        labs(title = paste(titles, "When Compared with", input$fill))
+        labs(title = paste(titles, "When Compared with", input$fill)) 
     } else if (input$fill == "Location") {
       ggplot(data = year.deaths) +
         geom_bar(mapping = aes(x = Age, fill = Location)) +
-        labs(title = paste(titles, "When Compared with", input$fill))
+        labs(title = paste(titles, "When Compared with", input$fill)) +
+        scale_colour_manual(values = c("Hospital" = "dark green", "Residence" = "red", "Hospice" = "dark blue", "Other" = "yellow"))
     } else {
       ggplot(data = year.deaths) +
         geom_bar(mapping = aes(x = Age)) +
