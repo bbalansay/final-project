@@ -1,6 +1,6 @@
 # Drug Use and Abuse
 ## By Bradley Balansay, Sam Chiang, Pranav Kartha, and McKinley Harvey
-###Final Project for INFO 201
+### Final Project for INFO 201
 
 This information comes from Data.gov and is all about drug use.
 Our data comes from two sources. The first source contains information about
